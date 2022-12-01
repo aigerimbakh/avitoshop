@@ -1,6 +1,5 @@
 package kz.narxoz.avitoshop.controllers;
 
-
 import kz.narxoz.avitoshop.model.Image;
 import kz.narxoz.avitoshop.repositories.ImageRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayInputStream;
+
 @RestController
 @RequiredArgsConstructor
 public class ImageController {
