@@ -5,6 +5,7 @@ import kz.narxoz.avitoshop.model.Product;
 import kz.narxoz.avitoshop.model.User;
 import kz.narxoz.avitoshop.repositories.ProductRepository;
 import kz.narxoz.avitoshop.repositories.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,11 +45,12 @@ public class ProductService {
             image3 = toImageEntity(file3);
             product.addImageToProduct(image3);
         }
-        log.info("Saving new Product. Title: {}; Author: {}", product.getTitle(), product.getUser().getEmail());
+        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(), product.getUser().getEmail());
         Product productFromDb = productRepository.save(product);
         productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
     }
+
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
@@ -64,7 +66,7 @@ public class ProductService {
         return image;
     }
 
-    public void deleteProduct(User user ,Long id) {
+    public void deleteProduct(User user, Long id) {
         Product product = productRepository.findById(id)
                 .orElse(null);
         if (product != null) {
@@ -76,11 +78,9 @@ public class ProductService {
             }
         } else {
             log.error("Product with id = {} is not found", id);
-        }
-    }
+        }    }
 
     public Product getProductById(Long id) {
-
         return productRepository.findById(id).orElse(null);
     }
 }
